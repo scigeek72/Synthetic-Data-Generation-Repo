@@ -9,3 +9,11 @@ Contains information (Blog posts, papers and software) about Synthetic Data (mos
 ## Papers
 -[Modeling Tabular data using Conditional GAN](https://arxiv.org/pdf/1907.00503.pdf) by Xiu, Skoularidou, Cuesta-Infante, Veeramachaneni 
   - Note: The paper claims that in tabular data, continuous features often fails to be Gaussian. When min-max transformation is used, it often lead to **vaninshing gradient problem**. [pp 3 (Non-Gaussian distribution)]
+
+
+
+## Notes
+
+I ran [SDV](https://github.com/sdv-dev) on our NetFlow data (both raw data and processed data were used). The SDV seems to have harder time to generate synthetic raw data ( because of `app_name` column for example), but it did much better on processed data. However, quality of the the features derived from hour and weekdays (using `sin` and `cosine` functions) dropped below 50%. This synthetic data is generated using the `preset` model provided (with set hyper-parameters). I couldn't run the other deep learning based models (**CTGAN** and **TVAE**) as they were taking a long time to compile. 
+
+As a **next step**, I would like to use our own trained VAE to generate synthetic data. This is achieved by sampling points and then reconstruct those sampled points. I will then check the quality of the generated data with the various metrics provided and use it train the VAE. 
